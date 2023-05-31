@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\IntelController;
+use App\Http\Controllers\PatientController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,8 +15,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', [IntelController::class, 'welcome'])->name('welcome');
-
-require __DIR__ . '/routes.php';
-require __DIR__ . '/auth.php';
-require __DIR__ . '/default_menu.php';
+Route::get('/daftar_rekam_medis', [PatientController::class, 'daftar_rm'])->name('pendaftaran.pasien.daftar_rm');
+Route::get('/pendaftaran_pasien_baru', [PatientController::class, 'pendaftaran_pasien_baru'])->name('pendaftaran.pasien.pendaftaran_pasien_baru');

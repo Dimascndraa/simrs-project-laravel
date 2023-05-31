@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth')->group(function () {
 
     // INTEL
+    Route::get('/test', [IntelController::class, 'test'])->name('test');
     Route::get('/dashboard', [IntelController::class, 'dashboard'])->name('dashboard');
     Route::get('/intel_analytics_dashboard', [IntelController::class, 'intel_analytics_dashboard'])->name('intel_analytics_dashboard');
     Route::get('/intel_marketing_dashboard', [IntelController::class, 'intel_marketing_dashboard'])->name('intel_marketing_dashboard');

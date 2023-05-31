@@ -713,6 +713,3 @@
 
     </div>
 </header>
-<!-- END Page Header -->
-<!-- BEGIN Page Content -->
-<!-- the #js-page-content id is needed for some plugins to initialize -->

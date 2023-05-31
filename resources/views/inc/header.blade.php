@@ -14,6 +14,7 @@
 <link rel="stylesheet" media="screen, print" href="/css/app.bundle.css">
 <link id="mythemes" rel="stylesheet" media="screen, print" href="/css/themes/cust-theme-3.css">
 <link id="myskins" rel="stylesheet" media="screen, print" href="/css/skins/skin-master.css">
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 <!-- Place favicon.ico in the root directory -->
 <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
@@ -33,7 +34,8 @@
 <link rel="stylesheet" media="screen, print" href="/css/notifications/toastr/toastr.css">
 <link rel="stylesheet" media="screen, print" href="/css/formplugins/bootstrap-colorpicker/bootstrap-colorpicker.css">
 <link rel="stylesheet" media="screen, print" href="/css/formplugins/bootstrap-datepicker/bootstrap-datepicker.css">
-<link rel="stylesheet" media="screen, print" href="/css/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.css">
+<link rel="stylesheet" media="screen, print"
+    href="/css/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.css">
 <link rel="stylesheet" media="screen, print" href="/css/formplugins/dropzone/dropzone.css">
 <link rel="stylesheet" media="screen, print" href="/css/formplugins/ion-rangeslider/ion-rangeslider.css">
 <link rel="stylesheet" media="screen, print" href="/css/formplugins/cropperjs/cropper.css">

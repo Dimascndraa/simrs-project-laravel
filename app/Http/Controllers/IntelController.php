@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 
 class IntelController extends Controller
 {
+    public function test()
+    {
+        return view('dashboard');
+    }
     public function welcome()
     {
         return view('welcome');
