@@ -44,21 +44,29 @@
                 </a>
             </li>
 
-            <li class="{{ set_active_mainmenu(['daftar_rekam_medis', 'pasien_non_rm']) }}">
+            <li class="{{ set_active_mainmenu(['daftar_rekam_medis', 'pasien_non_rm', 'pendaftaran_pasien_baru']) }}">
                 <a href="#" title="Pendaftaran" data-filter-tags="pendaftaran">
                     <i class="fal fa-user-plus"></i>
                     <span class="nav-link-text" data-i18n="nav.pendaftaran">Pendaftaran</span>
                 </a>
                 <ul>
-                    <li class="{{ set_active_mainmenu(['daftar_rekam_medis', 'pasien_non_rm']) }}">
+                    <li
+                        class="{{ set_active_mainmenu(['daftar_rekam_medis', 'pasien_non_rm', 'pendaftaran_pasien_baru']) }}">
                         <a href="#" title="Pendaftaran" data-filter-tags="pendaftaran">
                             <span class="nav-link-text" data-i18n="nav.pendaftaran_pasien">Pasien</span>
                         </a>
                         <ul>
-                            <li class="{{ set_active('daftar_rekam_medis') }}">
+                            <li class="{{ set_active('daftar_rekam_medis')}}">
                                 <a href="/daftar_rekam_medis" title="Daftar Rekam Medis"
                                     data-filter-tags="pendaftaran daftar rekam medis">
                                     <span class="nav-link-text" data-i18n="nav.pendaftaran_daftar_rekam_medis">Daftar
+                                        Rekam Medis</span>
+                                </a>
+                            </li>
+                            <li class="{{ set_active('pendaftaran_pasien_baru')}}" style="display: none">
+                                <a href="/pendaftaran_pasien_baru" title="Daftar Rekam Medis"
+                                    data-filter-tags="pendaftaran daftar rekam medis">
+                                    <span class="nav-link-text" data-i18n="nav.pendaftaran_pasien_baru">Daftar
                                         Rekam Medis</span>
                                 </a>
                             </li>

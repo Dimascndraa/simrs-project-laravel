@@ -17,3 +17,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/daftar_rekam_medis', [PatientController::class, 'daftar_rm'])->name('pendaftaran.pasien.daftar_rm');
 Route::get('/pendaftaran_pasien_baru', [PatientController::class, 'pendaftaran_pasien_baru'])->name('pendaftaran.pasien.pendaftaran_pasien_baru');
+Route::post('/pendaftaran_pasien_baru', [PatientController::class, 'simpan_pendaftaran_pasien'])->name('simpan.pendaftaran.pasien');
