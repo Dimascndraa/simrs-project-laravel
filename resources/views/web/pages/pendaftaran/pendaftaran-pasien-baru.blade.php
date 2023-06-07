@@ -11,7 +11,7 @@
 
     <form autocomplete="off" action="{{ route('simpan.pendaftaran.pasien') }}" method="post">
         @csrf
-        <div class="row">
+        <div class="row align-items-center">
             <div class="col-xl-12">
                 <div id="panel-1" class="panel">
                     <div class="panel-hdr bg-primary">
@@ -21,7 +21,7 @@
                     </div>
                     <div class="panel-container show">
                         <div class="panel-content">
-                            <div class="row">
+                            <div class="row align-items-center">
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <div class="row align-items-center">
@@ -29,8 +29,13 @@
                                                 <label for="name" class="form-label">Nama Lengkap *</label>
                                             </div>
                                             <div class="col-sm-8">
-                                                <input type="text" class="form-control" id="name" name="name"
-                                                    placeholder="Nama Lengkap Pasien">
+                                                <input type="text"
+                                                    class="@error('name') is-invalid @enderror form-control" id="name"
+                                                    name="name" placeholder="Nama Lengkap Pasien"
+                                                    value="{{ old('name') }}">
+                                                @error('name')
+                                                <p class="invalid-feedback">{{ $message }}</p>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
@@ -41,8 +46,13 @@
                                                     Panggilan</label>
                                             </div>
                                             <div class="col-sm-8">
-                                                <input type="text" class="form-control" id="nickname"
-                                                    placeholder="Nama Pangilan Pasien" name="nickname">
+                                                <input type="text"
+                                                    class="@error('nickname') is-invalid @enderror form-control"
+                                                    id="nickname" placeholder="Nama Pangilan Pasien" name="nickname"
+                                                    value="{{ old('nickname') }}">
+                                                @error('nickname')
+                                                <p class="invalid-feedback">{{ $message }}</p>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
@@ -54,20 +64,37 @@
                                                 </label>
                                             </div>
                                             <div class="col-sm-8">
-                                                <select class="form-control w-100" id="title" name="title">
+                                                <select class="@error('title') is-invalid @enderror form-control w-100"
+                                                    id="title" name="title">
                                                     <option value="" disabled selected></option>
-                                                    <option value="Tn.">Tuan (Tn)</option>
-                                                    <option value="Ny.">Nyonya (Ny)</option>
-                                                    <option value="Sdr.">Saudara (Sdr)</option>
-                                                    <option value="Sdri.">Saudari (Sdri)</option>
-                                                    <option value="An.">Anak (An)</option>
-                                                    <option value="By.">Bayi (By)</option>
+                                                    <option value="Tn." {{ old('title')==="Tn." ? "selected" : "" }}>
+                                                        Tuan (Tn)
+                                                    </option>
+                                                    <option value="Ny." {{ old('title')==="Ny." ? "selected" : "" }}>
+                                                        Nyonya (Ny)
+                                                    </option>
+                                                    <option value="Sdr." {{ old('title')==="Sdr." ? "selected" : "" }}>
+                                                        Saudara (Sdr)
+                                                    </option>
+                                                    <option value="Sdri." {{ old('title')==="Sdri." ? "selected" : ""
+                                                        }}>
+                                                        Saudari (Sdri)
+                                                    </option>
+                                                    <option value="An." {{ old('title')==="An." ? "selected" : "" }}>
+                                                        Anak (An)
+                                                    </option>
+                                                    <option value="By." {{ old('title')==="By." ? "selected" : "" }}>
+                                                        Bayi (By)
+                                                    </option>
                                                 </select>
+                                                @error('title')
+                                                <p class="invalid-feedback">{{ $message }}</p>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <div class="row">
+                                        <div class="row align-items-center">
                                             <div class="col-sm-4" style="text-align: right">
                                                 <label class="form-label d-block" for="gender">
                                                     Jenis Kelamin *
@@ -75,62 +102,105 @@
                                             </div>
                                             <div class="col-sm-8 pl-3">
                                                 <div class="custom-control custom-radio d-inline mr-2">
-                                                    <input type="radio" class="custom-control-input" value="laki-laki"
-                                                        id="laki-laki" name="gender">
+                                                    <input type="radio"
+                                                        class="@error('gender') is-invalid @enderror custom-control-input"
+                                                        value="laki-laki" id="laki-laki" name="gender" {{
+                                                        old('gender')==="laki-laki" ? "checked" : "" }}>
                                                     <label class="custom-control-label"
                                                         for="laki-laki">Laki-Laki</label>
                                                 </div>
                                                 <div class="custom-control custom-radio d-inline">
-                                                    <input type="radio" class="custom-control-input" value="perempuan"
-                                                        id="perempuan" name="gender">
+                                                    <input type="radio"
+                                                        class="@error('gender') is-invalid @enderror custom-control-input"
+                                                        value="perempuan" id="perempuan" name="gender" {{
+                                                        old('gender')==="perempuan" ? "checked" : "" }}>
                                                     <label class="custom-control-label"
                                                         for="perempuan">Perempuan</label>
+                                                    @error('gender')
+                                                    <p class="invalid-feedback">{{ $message }}</p>
+                                                    @enderror
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <div class="row">
+                                        <div class="row align-items-center">
                                             <div class="col-sm-4" style="text-align: right">
-                                                <label for="" class="form-label">Tempat, Tgl. Lahir</label>
+                                                <label for="" class="form-label">Tempat, Tgl. Lahir *</label>
                                             </div>
                                             <div class="col-sm-8">
-                                                <div class="row">
+                                                <div class="row align-items-center">
                                                     <div class="col-lg-6">
-                                                        <input type="text" class="form-control" id="place"
-                                                            placeholder="Tempat" name="place">
+                                                        <input type="text"
+                                                            class="@error('place') is-invalid @enderror form-control"
+                                                            id="place" placeholder="Tempat" name="place"
+                                                            value="{{ old('place') }}">
+                                                        @error('place')
+                                                        <p class="invalid-feedback">{{ $message }}</p>
+                                                        @enderror
                                                     </div>
                                                     <div class="col-lg-6">
-                                                        <input type="date" class="form-control" id="date_of_birth"
-                                                            placeholder="Tanggal Lahir" name="date_of_birth">
+                                                        <input type="date"
+                                                            class="@error('date_of_birth') is-invalid @enderror form-control"
+                                                            id="date_of_birth" placeholder="Tanggal Lahir"
+                                                            name="date_of_birth" value="{{ old('date_of_birth') }}">
+                                                        @error('date_of_birth')
+                                                        <p class="invalid-feedback">{{ $message }}</p>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <div class="row">
+                                        <div class="row align-items-center">
                                             <div class="col-sm-4" style="text-align: right">
                                                 <label class="form-label" for="religion">
                                                     Agama *
                                                 </label>
                                             </div>
                                             <div class="col-sm-8">
-                                                <select class="form-control w-100" id="religion" name="religion">
+                                                <select
+                                                    class="@error('religion') is-invalid @enderror form-control w-100"
+                                                    id="religion" name="religion">
                                                     <option value="" disabled selected></option>
-                                                    <option value="Islam">Islam</option>
-                                                    <option value="Kristen Protestan">Kristen Protestan</option>
-                                                    <option value="Katholik">Katholik</option>
-                                                    <option value="Budha">Budha</option>
-                                                    <option value="Hindu">Hindu</option>
-                                                    <option value="Kong Hu Cu">Kong Hu Cu</option>
-                                                    <option value="Lain lain">Lain lain</option>
+                                                    <option value="Islam" {{ old('religion')==="Islam" ? "selected" : ""
+                                                        }}>
+                                                        Islam
+                                                    </option>
+                                                    <option value="Kristen Protestan" {{
+                                                        old('religion')==="Kristen Protestan" ? "selected" : "" }}>
+                                                        Kristen Protestan
+                                                    </option>
+                                                    <option value="Katholik" {{ old('religion')==="Katholik"
+                                                        ? "selected" : "" }}>
+                                                        Katholik
+                                                    </option>
+                                                    <option value="Budha" {{ old('religion')==="Budha" ? "selected" : ""
+                                                        }}>
+                                                        Budha
+                                                    </option>
+                                                    <option value="Hindu" {{ old('religion')==="Hindu" ? "selected" : ""
+                                                        }}>
+                                                        Hindu
+                                                    </option>
+                                                    <option value="Kong Hu Cu" {{ old('religion')==="Kong u Chu"
+                                                        ? "selected" : "" }}>
+                                                        Kong Hu Cu
+                                                    </option>
+                                                    <option value="Lain lain" {{ old('religion')==="Lain lain"
+                                                        ? "selected" : "" }}>
+                                                        Lain lain
+                                                    </option>
                                                 </select>
+                                                @error('religion')
+                                                <p class="invalid-feedback">{{ $message }}</p>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <div class="row">
+                                        <div class="row align-items-center">
                                             <div class="col-sm-4" style="text-align: right">
                                                 <label class="form-label d-block"
                                                     style="margin-bottom: 1.4rem !important" id="blood_group">
@@ -140,40 +210,52 @@
                                             <div class="col-sm-8">
                                                 <div class="custom-control custom-radio d-inline mr-4">
                                                     <input type="radio" class="custom-control-input" id="o"
-                                                        name="blood_group">
+                                                        name="blood_group" value="O" {{ old('blood_group')==="O"
+                                                        ? "checked" : "" }}>
                                                     <label class="custom-control-label" for="o">O</label>
                                                 </div>
                                                 <div class="custom-control custom-radio d-inline mr-4">
                                                     <input type="radio" class="custom-control-input" id="a"
-                                                        name="blood_group">
+                                                        name="blood_group" value="A" {{ old('blood_group')==="A"
+                                                        ? "checked" : "" }}>
                                                     <label class="custom-control-label" for="a">A</label>
                                                 </div>
                                                 <div class="custom-control custom-radio d-inline mr-4">
                                                     <input type="radio" class="custom-control-input" id="b"
-                                                        name="blood_group">
+                                                        name="blood_group" value="B" {{ old('blood_group')==="B"
+                                                        ? "checked" : "" }}>
                                                     <label class="custom-control-label" for="b">B</label>
                                                 </div>
                                                 <div class="custom-control custom-radio d-inline mr-4">
                                                     <input type="radio" class="custom-control-input" id="ab"
-                                                        name="blood_group">
+                                                        name="blood_group" value="AB" {{ old('blood_group')==="AB"
+                                                        ? "checked" : "" }}>
                                                     <label class="custom-control-label" for="ab">AB</label>
                                                 </div>
+                                                @error('religion')
+                                                <p class="invalid-feedback">{{ $message }}</p>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <div class="row">
+                                        <div class="row align-items-center">
                                             <div class="col-sm-4" style="text-align: right">
                                                 <label for="allergy" class="form-label">Alergi</label>
                                             </div>
                                             <div class="col-sm-8">
-                                                <input type="text" class="form-control" id="allergy"
-                                                    placeholder="Alergi Pasien" name="allergy">
+                                                <input type="text"
+                                                    class="@error('allergy') is-invalid @enderror form-control"
+                                                    id="allergy" placeholder="Alergi Pasien" name="allergy"
+                                                    value="{{ old('allergy') }}">
+                                                @error('allergy')
+                                                <p class="invalid-feedback">{{ $message }}</p>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <div class="row">
+                                        <div class="row align-items-center">
                                             <div class="col-sm-4" style="text-align: right">
                                                 <label class="form-label mr-5 d-block"
                                                     style="margin-bottom: 1.4rem !important">
@@ -183,152 +265,208 @@
                                             <div class="col-sm-8">
                                                 <div class="custom-control custom-radio d-inline mr-4">
                                                     <input type="radio" class="custom-control-input" id="belum_menikah"
-                                                        name="married_status">
+                                                        name="married_status" value="Belum Menikah" {{
+                                                        old('married_status')==="Belum Menikah" ? "checked" : "" }}>
                                                     <label class="custom-control-label" for="belum_menikah">Belum
                                                         Menikah</label>
                                                 </div>
                                                 <div class="custom-control custom-radio d-inline mr-4">
                                                     <input type="radio" class="custom-control-input" id="menikah"
-                                                        name="married_status">
+                                                        name="married_status" value="Menikah" {{
+                                                        old('married_status')==="Menikah" ? "checked" : "" }}>
                                                     <label class="custom-control-label" for="menikah">Menikah</label>
                                                 </div>
                                                 <div class="custom-control custom-radio d-inline mr-4">
                                                     <input type="radio" class="custom-control-input" id="janda"
-                                                        name="married_status">
+                                                        name="married_status" value="Janda" {{
+                                                        old('married_status')==="Janda" ? "checked" : "" }}>
                                                     <label class="custom-control-label" for="janda">Janda</label>
                                                 </div>
                                                 <div class="custom-control custom-radio d-inline mr-4">
                                                     <input type="radio" class="custom-control-input" id="duda"
-                                                        name="married_status">
+                                                        name="married_status" value="Duda" {{
+                                                        old('married_status')==="Duda" ? "checked" : "" }}>
                                                     <label class="custom-control-label" for="duda">Duda</label>
                                                 </div>
+                                                @error('married_status')
+                                                <p class="invalid-feedback">{{ $message }}</p>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <div class="row">
+                                        <div class="row align-items-center">
                                             <div class="col-sm-4" style="text-align: right">
                                                 <label for="language" class="form-label">Bahasa *</label>
                                             </div>
                                             <div class="col-sm-8">
-                                                <input type="text" class="form-control" id="language"
-                                                    placeholder="Pasien Menggunakan Bahasa" value="Indonesia"
-                                                    name="language">
+                                                <input type="text"
+                                                    class="@error('language') is-invalid @enderror form-control"
+                                                    id="language" placeholder="Pasien Menggunakan Bahasa"
+                                                    value="{{ old('language', 'Indonesia') }}" name="language">
+                                                @error('language')
+                                                <p class="invalid-feedback">{{ $message }}</p>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <div class="row">
+                                        <div class="row align-items-center">
                                             <div class="col-sm-4" style="text-align: right">
                                                 <label for="citizenship" class="form-label">Kewarganegaraan</label>
                                             </div>
                                             <div class="col-sm-8">
-                                                <input type="text" class="form-control" id="citizenship" placeholder=""
-                                                    value="Indonesia" name="citizenship">
+                                                <input type="text"
+                                                    class="@error('citizenship') is-invalid @enderror form-control"
+                                                    id="citizenship" placeholder="Kewarganegaraan Pasien"
+                                                    value="{{ old('citizenship', 'Indonesia') }}" name="citizenship">
+                                                @error('citizenship')
+                                                <p class="invalid-feedback">{{ $message }}</p>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <div class="row">
+                                        <div class="row align-items-center">
                                             <div class="col-sm-4" style="text-align: right">
                                                 <label for="id_card" class="form-label">No. KTP/SIM/Paspor</label>
                                             </div>
                                             <div class="col-sm-8">
-                                                <input type="text" class="form-control" id="id_card"
-                                                    placeholder="No. KTP/SIM/Paspor Pasien" name="id_card">
+                                                <input type="text"
+                                                    class="@error('id_card') is-invalid @enderror form-control"
+                                                    id="id_card" placeholder="No. KTP/SIM/Paspor Pasien" name="id_card"
+                                                    value="{{ old('id_card') }}">
+                                                @error('id_card')
+                                                <p class="invalid-feedback">{{ $message }}</p>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <div class="row">
+                                        <div class="row align-items-center">
                                             <div class="col-sm-4" style="text-align: right">
                                                 <label for="address" class="form-label">Alamat *</label>
                                             </div>
                                             <div class="col-sm-8">
-                                                <input type="text" class="form-control" id="address"
-                                                    placeholder="Alamat Pasien" name="address">
+                                                <input type="text"
+                                                    class="@error('address') is-invalid @enderror form-control"
+                                                    id="address" placeholder="Alamat Pasien" name="address"
+                                                    value="{{ old('address') }}">
+                                                @error('address')
+                                                <p class="invalid-feedback">{{ $message }}</p>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <div class="row">
+                                        <div class="row align-items-center">
                                             <div class="col-sm-4" style="text-align: right">
                                                 <label for="province" class="form-label">Provinsi</label>
                                             </div>
                                             <div class="col-sm-8">
-                                                <select class="form-control w-100" id="province" name="province">
+                                                <select
+                                                    class="@error('province') is-invalid @enderror form-control w-100"
+                                                    id="province" name="province">
                                                     <option value="" disabled selected></option>
                                                     @foreach($provinces as $province)
                                                     <option value="{{ $province['id'] }}">{{ $province['nama'] }}
                                                     </option>
                                                     @endforeach
                                                 </select>
+                                                @error('province')
+                                                <p class="invalid-feedback">{{ $message }}</p>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <div class="row">
+                                        <div class="row align-items-center">
                                             <div class="col-sm-4" style="text-align: right">
                                                 <label class="form-label" for="regency">Kota / Kabupaten
                                                     *</label>
                                             </div>
                                             <div class="col-sm-8">
-                                                <select class="form-control w-100" id="regency" name="regency">
+                                                <select
+                                                    class="@error('regency') is-invalid @enderror form-control w-100"
+                                                    id="regency" name="regency">
                                                     <option value="" disabled selected></option>
                                                 </select>
+                                                @error('regency')
+                                                <p class="invalid-feedback">{{ $message }}</p>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <div class="row">
+                                        <div class="row align-items-center">
                                             <div class="col-sm-4" style="text-align: right">
                                                 <label class="form-label" for="subdistrict">Kecamatan *</label>
                                             </div>
                                             <div class="col-sm-8">
-                                                <select class="form-control w-100" id="subdistrict" name="subdistrict">
+                                                <select
+                                                    class="@error('subdistrict') is-invalid @enderror form-control w-100"
+                                                    id="subdistrict" name="subdistrict">
                                                     <option value="" disabled selected></option>
                                                 </select>
+                                                @error('subdistrict')
+                                                <p class="invalid-feedback">{{ $message }}</p>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <div class="row">
+                                        <div class="row align-items-center">
                                             <div class="col-sm-4" style="text-align: right">
                                                 <label class="form-label" for="ward">Kelurahan *</label>
                                             </div>
                                             <div class="col-sm-8">
-                                                <select class="form-control w-100" id="ward" name="ward">
+                                                <select class="@error('ward') is-invalid @enderror form-control w-100"
+                                                    id="ward" name="ward">
                                                     <option value="" disabled selected></option>
                                                 </select>
+                                                @error('ward')
+                                                <p class="invalid-feedback">{{ $message }}</p>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <div class="row">
+                                        <div class="row align-items-center">
                                             <div class="col-sm-4" style="text-align: right">
-                                                <label for="mobile_phone_number" class="form-label">No. HP/Telp</label>
+                                                <label for="mobile_phone_number" class="form-label">No. HP/Telp
+                                                    *</label>
                                             </div>
                                             <div class="col-sm-8">
-                                                <input type="text" class="form-control" id="mobile_phone_number"
-                                                    placeholder="No. HP / Telp Pasien" name="mobile_phone_number">
+                                                <input type="text"
+                                                    class="@error('mobile_phone_number') is-invalid @enderror form-control"
+                                                    id="mobile_phone_number" placeholder="No. HP / Telp Pasien"
+                                                    name="mobile_phone_number" value="{{ old('mobile_phone_number') }}">
+                                                @error('mobile_phone_number')
+                                                <p class="invalid-feedback">{{ $message }}</p>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <div class="row">
+                                        <div class="row align-items-center">
                                             <div class="col-sm-4" style="text-align: right">
-                                                <label for="email" class="form-label">Email</label>
+                                                <label for="email"
+                                                    class="@error('email') is-invalid @enderror form-label">Email</label>
                                             </div>
                                             <div class="col-sm-8">
                                                 <input type="email" class="form-control" id="email"
-                                                    placeholder="Alamat Email Pasien" name="email">
+                                                    placeholder="Alamat Email Pasien" name="email"
+                                                    value="{{ old('email') }}">
+                                                @error('email')
+                                                <p class="invalid-feedback">{{ $message }}</p>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <div class="row">
+                                        <div class="row align-items-center">
                                             <div class="col-sm-4" style="text-align: right">
                                                 <label class="form-label" for="last_education">
                                                     Pendidikan Terakhir *
@@ -336,146 +474,69 @@
                                             </div>
                                             <div class="col-sm-8">
 
-                                                <select class="form-control w-100" id="last_education"
-                                                    name="last_education">
+                                                <select
+                                                    class="@error('last_education') is-invalid @enderror form-control w-100"
+                                                    id="last_education" name="last_education">
                                                     <option value="" disabled selected></option>
-                                                    <option value="Tidak Sekolah">Tidak Sekolah</option>
-                                                    <option value="Belum / Tidak tamat SD">Belum / Tidak tamat SD
+                                                    <option value="Tidak Sekolah" {{
+                                                        old('last_education')==="Tidak Sekolah" ? "selected" : "" }}>
+                                                        Tidak Sekolah</option>
+                                                    <option value="Belum / Tidak tamat SD" {{
+                                                        old('last_education')==="Belum / Tidak tamat SD" ? "selected"
+                                                        : "" }}>Belum / Tidak tamat SD
                                                     </option>
-                                                    <option value="Tamat SD">Tamat SD</option>
-                                                    <option value="Tamat SMTP">Tamat SMTP</option>
-                                                    <option value="Tamat SLTA">Tamat SLTA</option>
-                                                    <option value="Tamat D3">Tamat D3</option>
-                                                    <option value="Tamat S1">Tamat S1</option>
-                                                    <option value="Tamat S2">Tamat S2</option>
-                                                    <option value="Tamat PT">Tamat PT</option>
+                                                    <option value="Tamat SD" {{ old('last_education')==="Tamat SD"
+                                                        ? "selected" : "" }}>Tamat SD</option>
+                                                    <option value="Tamat SMTP" {{ old('last_education')==="Tamat SMTP"
+                                                        ? "selected" : "" }}>Tamat SMTP</option>
+                                                    <option value="Tamat SLTA" {{ old('last_education')==="Tamat SLTA"
+                                                        ? "selected" : "" }}>Tamat SLTA</option>
+                                                    <option value="Tamat D3" {{ old('last_education')==="Tamat D3"
+                                                        ? "selected" : "" }}>Tamat D3</option>
+                                                    <option value="Tamat S1" {{ old('last_education')==="Tamat S1"
+                                                        ? "selected" : "" }}>Tamat S1</option>
+                                                    <option value="Tamat S2" {{ old('last_education')==="Tamat S2"
+                                                        ? "selected" : "" }}>Tamat S2</option>
+                                                    <option value="Tamat PT" {{ old('last_education')==="Tamat PT"
+                                                        ? "selected" : "" }}>Tamat PT</option>
                                                 </select>
+                                                @error('last_education')
+                                                <p class="invalid-feedback">{{ $message }}</p>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <div class="row">
+                                        <div class="row align-items-center">
                                             <div class="col-sm-4" style="text-align: right">
                                                 <label class="form-label" for="ethnic">
                                                     Suku / Etnis *
                                                 </label>
                                             </div>
                                             <div class="col-sm-8">
-                                                <select class="form-control w-100" id="ethnic" name="ethic">
+                                                <select class="@error('ethnic') is-invalid @enderror form-control w-100"
+                                                    id="ethnic" name="ethnic">
                                                     <option value="" selected disabled></option>
-                                                    <option value="Aceh">Aceh</option>
-                                                    <option value="Alas">Alas</option>
-                                                    <option value="Alor">Alor</option>
-                                                    <option value="Ambon">Ambon</option>
-                                                    <option value="Aneuk Jamee">Aneuk Jamee</option>
-                                                    <option value="Arab">Arab</option>
-                                                    <option value="Arfak">Arfak</option>
-                                                    <option value="Asmat">Asmat</option>
-                                                    <option value="Atoni">Atoni</option>
-                                                    <option value="Auwye/Mee">Auwye/Mee</option>
-                                                    <option value="Bajao">Bajao</option>
-                                                    <option value="Bali">Bali</option>
-                                                    <option value="Banggai">Banggai</option>
-                                                    <option value="Bangka">Bangka</option>
-                                                    <option value="Banjar">Banjar</option>
-                                                    <option value="Banten">Banten</option>
-                                                    <option value="Batak">Batak</option>
-                                                    <option value="Bawean">Bawean</option>
-                                                    <option value="Belitung">Belitung</option>
-                                                    <option value="Betawi">Betawi</option>
-                                                    <option value="Biak Numfor">Biak Numfor</option>
-                                                    <option value="Bima">Bima</option>
-                                                    <option value="Bugis">Bugis</option>
-                                                    <option value="Buol">Buol</option>
-                                                    <option value="Buton">Buton</option>
-                                                    <option value="Cirebon">Cirebon</option>
-                                                    <option value="Dani">Dani</option>
-                                                    <option value="Dauwa">Dauwa</option>
-                                                    <option value="Daya">Daya</option>
-                                                    <option value="Dayak">Dayak</option>
-                                                    <option value="Dompu">Dompu</option>
-                                                    <option value="Duri">Duri</option>
-                                                    <option value="Enim">Enim</option>
-                                                    <option value="Flores">Flores</option>
-                                                    <option value="Galela">Galela</option>
-                                                    <option value="Gayo">Gayo</option>
-                                                    <option value="Gorontalo">Gorontalo</option>
-                                                    <option value="Jawa">Jawa</option>
-                                                    <option value="Kaili">Kaili</option>
-                                                    <option value="Kei">Kei</option>
-                                                    <option value="Kerinci">Kerinci</option>
-                                                    <option value="Komering">Komering</option>
-                                                    <option value="Kutai">Kutai</option>
-                                                    <option value="Lamaholot">Lamaholot</option>
-                                                    <option value="Lampung">Lampung</option>
-                                                    <option value="Lauje">Lauje</option>
-                                                    <option value="Lembak">Lembak</option>
-                                                    <option value="Lio">Lio</option>
-                                                    <option value="Luwu">Luwu</option>
-                                                    <option value="Madura">Madura</option>
-                                                    <option value="Makassar">Makassar</option>
-                                                    <option value="Makian">Makian</option>
-                                                    <option value="Mamasa">Mamasa</option>
-                                                    <option value="Mamuju">Mamuju</option>
-                                                    <option value="Mandar">Mandar</option>
-                                                    <option value="Manggarai">Manggarai</option>
-                                                    <option value="Mbojo">Mbojo</option>
-                                                    <option value="Melayu">Melayu</option>
-                                                    <option value="Mentawai">Mentawai</option>
-                                                    <option value="Minahasa">Minahasa</option>
-                                                    <option value="Minangkabau">Minangkabau</option>
-                                                    <option value="Mongondow">Mongondow</option>
-                                                    <option value="Moni">Moni</option>
-                                                    <option value="Muna">Muna</option>
-                                                    <option value="Musi">Musi</option>
-                                                    <option value="Ngada">Ngada</option>
-                                                    <option value="Ngalik">Ngalik</option>
-                                                    <option value="Nias">Nias</option>
-                                                    <option value="Ogan">Ogan</option>
-                                                    <option value="Osing/Using">Osing/Using</option>
-                                                    <option value="Palembang">Palembang</option>
-                                                    <option value="Pamona">Pamona</option>
-                                                    <option value="Pasir">Pasir</option>
-                                                    <option value="Rambang">Rambang</option>
-                                                    <option value="Rawas">Rawas</option>
-                                                    <option value="Rejang">Rejang</option>
-                                                    <option value="Rote">Rote</option>
-                                                    <option value="Saluan">Saluan</option>
-                                                    <option value="Sangir">Sangir</option>
-                                                    <option value="Saparua">Saparua</option>
-                                                    <option value="Sasak">Sasak</option>
-                                                    <option value="Sawu">Sawu</option>
-                                                    <option value="Selayar">Selayar</option>
-                                                    <option value="Seram">Seram</option>
-                                                    <option value="Simeulue">Simeulue</option>
-                                                    <option value="Sula">Sula</option>
-                                                    <option value="Sumba">Sumba</option>
-                                                    <option value="Sumbawa">Sumbawa</option>
-                                                    <option value="Sunda">Sunda</option>
-                                                    <option value="Talaud">Talaud</option>
-                                                    <option value="Tanimbar">Tanimbar</option>
-                                                    <option value="Ternate">Ternate</option>
-                                                    <option value="Tidore">Tidore</option>
-                                                    <option value="Timor Leste">Timor Leste</option>
-                                                    <option value="Tionghoa">Tionghoa</option>
-                                                    <option value="Tobelo">Tobelo</option>
-                                                    <option value="Tolaki">Tolaki</option>
-                                                    <option value="Tomini">Tomini</option>
-                                                    <option value="Toraja">Toraja</option>
-                                                    <option value="Yapen">Yapen</option>
+                                                    @foreach ($ethnics as $ethnic)
+                                                    <option value="{{ $ethnic->id }}">{{ $ethnic->name }}</option>
+                                                    @endforeach
                                                 </select>
+                                                @error('ethnic')
+                                                <p class="invalid-feedback">{{ $message }}</p>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <div class="row">
+                                        <div class="row align-items-center">
                                             <div class="col-sm-4" style="text-align: right">
                                                 <label class="form-label" for="job">
                                                     Pekerjaan *
                                                 </label>
                                             </div>
                                             <div class="col-sm-8">
-                                                <select class="form-control w-100" id="job" name="job">
+                                                <select class="@error('job') is-invalid @enderror form-control w-100"
+                                                    id="job" name="job">
                                                     <option value="" disabled selected></option>
                                                     <option value="Belum Bekerja">Belum Bekerja</option>
                                                     <option value="Tidak Bekerja">Tidak Bekerja</option>
@@ -493,6 +554,9 @@
                                                     <option value="Wirausaha">Wirausaha</option>
                                                     <option value="Lain-lain">Lain-lain</option>
                                                 </select>
+                                                @error('job')
+                                                <p class="invalid-feedback">{{ $message }}</p>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
@@ -511,7 +575,7 @@
                     </div>
                     <div class="panel-container show">
                         <div class="panel-content">
-                            <div class="row">
+                            <div class="row align-items-center">
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <div class="row align-items-center">
@@ -537,7 +601,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <div class="row">
+                                        <div class="row align-items-center">
                                             <div class="col-sm-4" style="text-align: right">
                                                 <label for="family_job" class="form-label">Pekerjaan</label>
                                             </div>
@@ -548,7 +612,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <div class="row">
+                                        <div class="row align-items-center">
                                             <div class="col-sm-4" style="text-align: right">
                                                 <label for="father_name" class="form-label">Nama Ayah</label>
                                             </div>
@@ -561,7 +625,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <div class="row">
+                                        <div class="row align-items-center">
                                             <div class="col-sm-4" style="text-align: right">
                                                 <label for="family_relationship" class="form-label">Hubungan
                                                     Keluarga</label>
@@ -585,7 +649,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <div class="row">
+                                        <div class="row align-items-center">
                                             <div class="col-sm-4" style="text-align: right">
                                                 <label for="family_mobile_phone_number" class="form-label">No. HP /
                                                     Telp</label>
@@ -597,7 +661,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <div class="row">
+                                        <div class="row align-items-center">
                                             <div class="col-sm-4" style="text-align: right">
                                                 <label for="family_address" class="form-label">Alamat</label>
                                             </div>
@@ -608,7 +672,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <div class="row">
+                                        <div class="row align-items-center">
                                             <div class="col-sm-4" style="text-align: right">
                                                 <label for="mother_name" class="form-label">Nama Ibu</label>
                                             </div>
@@ -626,14 +690,14 @@
             </div>
             <div class="col-xl-12">
                 <div id="panel-1" class="panel">
-                    <div class="panel-hdr bg-success-500">
+                    <div class="panel-hdr bg-primary-500">
                         <h2 class="text-white">
                             Informasi<span class="fw-300"><i>Penjamin</i></span>
                         </h2>
                     </div>
                     <div class="panel-container show">
                         <div class="panel-content">
-                            <div class="row">
+                            <div class="row align-items-center">
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <div class="row align-items-center">
@@ -662,7 +726,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <div class="row">
+                                        <div class="row align-items-center">
                                             <div class="col-sm-4" style="text-align: right">
                                                 <label for="employee_name" class="form-label">Nama Pegawai</label>
                                             </div>
@@ -673,7 +737,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <div class="row">
+                                        <div class="row align-items-center">
                                             <div class="col-sm-4" style="text-align: right">
                                                 <label for="patient_relationship" class="form-label">Hubungan
                                                     Pasien</label>
@@ -687,7 +751,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <div class="row">
+                                        <div class="row align-items-center">
                                             <div class="col-sm-4" style="text-align: right">
                                                 <label for="company" class="form-label">Perusahaan</label>
                                             </div>
@@ -698,7 +762,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <div class="row">
+                                        <div class="row align-items-center">
                                             <div class="col-sm-4" style="text-align: right">
                                                 <label for="employee_number" class="form-label">No. Pegawai</label>
                                             </div>
@@ -709,7 +773,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <div class="row">
+                                        <div class="row align-items-center">
                                             <div class="col-sm-4" style="text-align: right">
                                                 <label for="unit" class="form-label">Bagian</label>
                                             </div>
@@ -720,7 +784,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <div class="row">
+                                        <div class="row align-items-center">
                                             <div class="col-sm-4" style="text-align: right">
                                                 <label for="group" class="form-label">Grup</label>
                                             </div>
@@ -738,7 +802,7 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row align-items-center">
             <div class="col-6">
                 <a href="{{ route('pendaftaran.pasien.daftar_rm') }}"
                     class="btn btn-lg btn-outline-primary waves-effect waves-themed">
@@ -775,7 +839,7 @@
         , });
 
         $('#ward').select2({
-            'placeholder': 'Pilih Kabupaten'
+            'placeholder': 'Pilih Kelurahan'
         , });
 
         $('#regency').select2({

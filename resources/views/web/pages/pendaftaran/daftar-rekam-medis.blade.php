@@ -27,33 +27,37 @@
                         <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
                             <thead class="bg-primary-600">
                                 <tr>
+                                    <th>#</th>
                                     <th>No. RM</th>
                                     <th>Nama Lengkap</th>
                                     <th>Alamat</th>
                                     <th>Tempat & Tgl. Lahir</th>
-                                    <th>No. Telp</th>
                                     <th>No. Hp</th>
                                     <th>Keluarga yang dapat dihubungi</th>
                                     <th>Penjamin</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($patients as $patien)
+                                @foreach ($patients as $patient)
                                 <tr>
+                                    <td>{{ $loop->iteration }}</td>
                                     <td>{{ $patient->medical_record_number }}</td>
                                     <td>{{ $patient->name }}</td>
                                     <td>{{ $patient->address }}</td>
-                                    <td>{{ $patient->address }}</td>
+                                    <td>{{ $patient->place }}, {{ $patient->date_of_birth }}</td>
+                                    <td>{{ $patient->mobile_phone_number }}</td>
+                                    <td>{{ $patient->mobile_phone_number }}</td>
+                                    <td>{{ $patient->mobile_phone_number }}</td>
                                 </tr>
                                 @endforeach
                             </tbody>
                             <tfoot>
                                 <tr>
+                                    <th>#</th>
                                     <th>No. RM</th>
                                     <th>Nama Lengkap</th>
                                     <th>Alamat</th>
                                     <th>Tempat & Tgl. Lahir</th>
-                                    <th>No. Telp</th>
                                     <th>No. Hp</th>
                                     <th>Keluarga yang dapat dihubungi</th>
                                     <th>Penjamin</th>
