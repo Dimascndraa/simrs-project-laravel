@@ -41,13 +41,20 @@
                                 @foreach ($patients as $patient)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $patient->medical_record_number }}</td>
-                                    <td>{{ $patient->name }}</td>
-                                    <td>{{ $patient->address }}</td>
-                                    <td>{{ $patient->place }}, {{ $patient->date_of_birth }}</td>
-                                    <td>{{ $patient->mobile_phone_number }}</td>
-                                    <td>{{ $patient->mobile_phone_number }}</td>
-                                    <td>{{ $patient->mobile_phone_number }}</td>
+                                    <td><a href="{{ route('detail.pendaftaran.pasien', $patient->id) }}">{{
+                                            $patient->medical_record_number }}</a></td>
+                                    <td><a href="{{ route('detail.pendaftaran.pasien', $patient->id) }}">{{
+                                            $patient->name }}</a></td>
+                                    <td><a href="{{ route('detail.pendaftaran.pasien', $patient->id) }}">{{
+                                            $patient->address }}</a></td>
+                                    <td><a href="{{ route('detail.pendaftaran.pasien', $patient->id) }}">{{
+                                            $patient->place }}, {{ $patient->date_of_birth }}</a></td>
+                                    <td><a href="{{ route('detail.pendaftaran.pasien', $patient->id) }}">{{
+                                            $patient->mobile_phone_number }}</a></td>
+                                    <td><a href="{{ route('detail.pendaftaran.pasien', $patient->id) }}">{{
+                                            $patient->mobile_phone_number }}</a></td>
+                                    <td><a href="{{ route('detail.pendaftaran.pasien', $patient->id) }}">{{
+                                            $patient->mobile_phone_number }}</a></td>
                                 </tr>
                                 @endforeach
                             </tbody>

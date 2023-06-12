@@ -29,6 +29,11 @@ class PatientController extends Controller
         ]);
     }
 
+    public function detail_patient(Patient $patient)
+    {
+        return $patient;
+    }
+
     public function simpan_pendaftaran_pasien(Request $request)
     {
         $validatedData = $request->validate([

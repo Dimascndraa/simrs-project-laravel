@@ -17,7 +17,7 @@ use App\Http\Controllers\UiController;
 use App\Http\Controllers\UtilitiesController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('auth')->group(function () {
+Route::group(['middleware' => ['web', 'auto.logout']], function () {
 
     // INTEL
     Route::get('/test', [IntelController::class, 'test'])->name('test');
