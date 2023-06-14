@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\IntelController;
+use App\Http\Controllers\PatientController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,7 +18,6 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => ['web', 'auto.logout']], function () {
     Route::get('/', [IntelController::class, 'welcome'])->name('welcome');
 });
-
 
 require __DIR__ . '/routes.php';
 require __DIR__ . '/auth.php';

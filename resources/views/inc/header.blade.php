@@ -15,6 +15,7 @@
 <link id="mythemes" rel="stylesheet" media="screen, print" href="/css/themes/cust-theme-3.css">
 <link id="myskins" rel="stylesheet" media="screen, print" href="/css/skins/skin-master.css">
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+<link href='https://cdn.jsdelivr.net/npm/@mdi/font@7.2.96/css/materialdesignicons.min.css' rel='stylesheet'>
 <!-- Place favicon.ico in the root directory -->
 <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">

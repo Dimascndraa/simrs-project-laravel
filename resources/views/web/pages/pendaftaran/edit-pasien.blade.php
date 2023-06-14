@@ -1,4 +1,4 @@
-{{-- @dd($provinces) --}}
+{{-- @dd($patient) --}}
 @extends('inc.layout')
 @section('title','Pendaftaran Pasien Baru')
 @section('content')
@@ -32,7 +32,7 @@
                                                 <input type="text"
                                                     class="@error('name') is-invalid @enderror form-control" id="name"
                                                     name="name" placeholder="Nama Lengkap Pasien"
-                                                    value="{{ old('name') }}">
+                                                    value="{{ old('name', $patient->name) }}">
                                                 @error('name')
                                                 <p class="invalid-feedback">{{ $message }}</p>
                                                 @enderror
@@ -49,7 +49,7 @@
                                                 <input type="text"
                                                     class="@error('nickname') is-invalid @enderror form-control"
                                                     id="nickname" placeholder="Nama Pangilan Pasien" name="nickname"
-                                                    value="{{ old('nickname') }}">
+                                                    value="{{ old('nickname', $patient->nickname) }}">
                                                 @error('nickname')
                                                 <p class="invalid-feedback">{{ $message }}</p>
                                                 @enderror
@@ -67,23 +67,32 @@
                                                 <select class="@error('title') is-invalid @enderror form-control w-100"
                                                     id="title" name="title">
                                                     <option value="" disabled selected></option>
-                                                    <option value="Tn." {{ old('title')==="Tn." ? "selected" : "" }}>
+                                                    <option value="Tn." {{ old('title', $patient->title
+                                                        )==="Tn." ? "selected" : "" }}>
                                                         Tuan (Tn)
                                                     </option>
-                                                    <option value="Ny." {{ old('title')==="Ny." ? "selected" : "" }}>
+                                                    <option value="Ny." {{ old('title', $patient->title)==="Ny." ?
+                                                        "selected"
+                                                        : "" }}>
                                                         Nyonya (Ny)
                                                     </option>
-                                                    <option value="Sdr." {{ old('title')==="Sdr." ? "selected" : "" }}>
+                                                    <option value="Sdr." {{ old('title', $patient->title)==="Sdr." ?
+                                                        "selected" : "" }}>
                                                         Saudara (Sdr)
                                                     </option>
-                                                    <option value="Sdri." {{ old('title')==="Sdri." ? "selected" : ""
+                                                    <option value="Sdri." {{ old('title', $patient->title)==="Sdri." ?
+                                                        "selected" : ""
                                                         }}>
                                                         Saudari (Sdri)
                                                     </option>
-                                                    <option value="An." {{ old('title')==="An." ? "selected" : "" }}>
+                                                    <option value="An." {{ old('title', $patient->title)==="An." ?
+                                                        "selected"
+                                                        : "" }}>
                                                         Anak (An)
                                                     </option>
-                                                    <option value="By." {{ old('title')==="By." ? "selected" : "" }}>
+                                                    <option value="By." {{ old('title', $patient->title)==="By." ?
+                                                        "selected"
+                                                        : "" }}>
                                                         Bayi (By)
                                                     </option>
                                                 </select>
@@ -104,16 +113,16 @@
                                                 <div class="custom-control custom-radio d-inline mr-2">
                                                     <input type="radio"
                                                         class="@error('gender') is-invalid @enderror custom-control-input"
-                                                        value="laki-laki" id="laki-laki" name="gender" {{
-                                                        old('gender')==="laki-laki" ? "checked" : "" }}>
+                                                        value="laki-laki" id="laki-laki" name="gender" {{ old('gender',
+                                                        $patient->gender)==="laki-laki" ? "checked" : "" }}>
                                                     <label class="custom-control-label"
                                                         for="laki-laki">Laki-Laki</label>
                                                 </div>
                                                 <div class="custom-control custom-radio d-inline">
                                                     <input type="radio"
                                                         class="@error('gender') is-invalid @enderror custom-control-input"
-                                                        value="perempuan" id="perempuan" name="gender" {{
-                                                        old('gender')==="perempuan" ? "checked" : "" }}>
+                                                        value="perempuan" id="perempuan" name="gender" {{ old('gender',
+                                                        $patient->gender)==="perempuan" ? "checked" : "" }}>
                                                     <label class="custom-control-label"
                                                         for="perempuan">Perempuan</label>
                                                     @error('gender')
@@ -134,7 +143,7 @@
                                                         <input type="text"
                                                             class="@error('place') is-invalid @enderror form-control"
                                                             id="place" placeholder="Tempat" name="place"
-                                                            value="{{ old('place') }}">
+                                                            value="{{ old('place', $patient->place) }}">
                                                         @error('place')
                                                         <p class="invalid-feedback">{{ $message }}</p>
                                                         @enderror
@@ -143,7 +152,8 @@
                                                         <input type="date"
                                                             class="@error('date_of_birth') is-invalid @enderror form-control"
                                                             id="date_of_birth" placeholder="Tanggal Lahir"
-                                                            name="date_of_birth" value="{{ old('date_of_birth') }}">
+                                                            name="date_of_birth"
+                                                            value="{{ old('date_of_birth', $patient->date_of_birth) }}">
                                                         @error('date_of_birth')
                                                         <p class="invalid-feedback">{{ $message }}</p>
                                                         @enderror
@@ -164,31 +174,37 @@
                                                     class="@error('religion') is-invalid @enderror form-control w-100"
                                                     id="religion" name="religion">
                                                     <option value="" disabled selected></option>
-                                                    <option value="Islam" {{ old('religion')==="Islam" ? "selected" : ""
+                                                    <option value="Islam" {{ old('religion', $patient->
+                                                        religion)==="Islam" ? "selected" : ""
                                                         }}>
                                                         Islam
                                                     </option>
-                                                    <option value="Kristen Protestan" {{
-                                                        old('religion')==="Kristen Protestan" ? "selected" : "" }}>
+                                                    <option value="Kristen Protestan" {{ old('religion', $patient->
+                                                        religion)==="Kristen Protestan" ? "selected" : "" }}>
                                                         Kristen Protestan
                                                     </option>
-                                                    <option value="Katholik" {{ old('religion')==="Katholik"
+                                                    <option value="Katholik" {{ old('religion', $patient->
+                                                        religion)==="Katholik"
                                                         ? "selected" : "" }}>
                                                         Katholik
                                                     </option>
-                                                    <option value="Budha" {{ old('religion')==="Budha" ? "selected" : ""
+                                                    <option value="Budha" {{ old('religion', $patient->
+                                                        religion)==="Budha" ? "selected" : ""
                                                         }}>
                                                         Budha
                                                     </option>
-                                                    <option value="Hindu" {{ old('religion')==="Hindu" ? "selected" : ""
+                                                    <option value="Hindu" {{ old('religion', $patient->
+                                                        religion)==="Hindu" ? "selected" : ""
                                                         }}>
                                                         Hindu
                                                     </option>
-                                                    <option value="Kong Hu Cu" {{ old('religion')==="Kong u Chu"
+                                                    <option value="Kong Hu Cu" {{ old('religion', $patient->
+                                                        religion)==="Kong u Chu"
                                                         ? "selected" : "" }}>
                                                         Kong Hu Cu
                                                     </option>
-                                                    <option value="Lain lain" {{ old('religion')==="Lain lain"
+                                                    <option value="Lain lain" {{ old('religion', $patient->
+                                                        religion)==="Lain lain"
                                                         ? "selected" : "" }}>
                                                         Lain lain
                                                     </option>
@@ -210,26 +226,30 @@
                                             <div class="col-sm-8">
                                                 <div class="custom-control custom-radio d-inline mr-4">
                                                     <input type="radio" class="custom-control-input" id="o"
-                                                        name="blood_group" value="O" {{ old('blood_group')==="O"
-                                                        ? "checked" : "" }}>
+                                                        name="blood_group" value="O" {{ old('blood_group',
+                                                        $patient->blood_group)==="O"
+                                                    ? "checked" : "" }}>
                                                     <label class="custom-control-label" for="o">O</label>
                                                 </div>
                                                 <div class="custom-control custom-radio d-inline mr-4">
                                                     <input type="radio" class="custom-control-input" id="a"
-                                                        name="blood_group" value="A" {{ old('blood_group')==="A"
-                                                        ? "checked" : "" }}>
+                                                        name="blood_group" value="A" {{ old('blood_group',
+                                                        $patient->blood_group)==="A"
+                                                    ? "checked" : "" }}>
                                                     <label class="custom-control-label" for="a">A</label>
                                                 </div>
                                                 <div class="custom-control custom-radio d-inline mr-4">
                                                     <input type="radio" class="custom-control-input" id="b"
-                                                        name="blood_group" value="B" {{ old('blood_group')==="B"
-                                                        ? "checked" : "" }}>
+                                                        name="blood_group" value="B" {{ old('blood_group',
+                                                        $patient->blood_group)==="B"
+                                                    ? "checked" : "" }}>
                                                     <label class="custom-control-label" for="b">B</label>
                                                 </div>
                                                 <div class="custom-control custom-radio d-inline mr-4">
                                                     <input type="radio" class="custom-control-input" id="ab"
-                                                        name="blood_group" value="AB" {{ old('blood_group')==="AB"
-                                                        ? "checked" : "" }}>
+                                                        name="blood_group" value="AB" {{ old('blood_group',
+                                                        $patient->blood_group)==="AB"
+                                                    ? "checked" : "" }}>
                                                     <label class="custom-control-label" for="ab">AB</label>
                                                 </div>
                                                 @error('religion')
@@ -247,7 +267,7 @@
                                                 <input type="text"
                                                     class="@error('allergy') is-invalid @enderror form-control"
                                                     id="allergy" placeholder="Alergi Pasien" name="allergy"
-                                                    value="{{ old('allergy') }}">
+                                                    value="{{ old('allergy', $patient->allergy) }}">
                                                 @error('allergy')
                                                 <p class="invalid-feedback">{{ $message }}</p>
                                                 @enderror
@@ -266,26 +286,27 @@
                                                 <div class="custom-control custom-radio d-inline mr-4">
                                                     <input type="radio" class="custom-control-input" id="belum_menikah"
                                                         name="married_status" value="Belum Menikah" {{
-                                                        old('married_status')==="Belum Menikah" ? "checked" : "" }}>
+                                                        old('married_status', $patient->married_status )
+                                                    === "Belum Menikah" ? "checked" : "" }}>
                                                     <label class="custom-control-label" for="belum_menikah">Belum
                                                         Menikah</label>
                                                 </div>
                                                 <div class="custom-control custom-radio d-inline mr-4">
                                                     <input type="radio" class="custom-control-input" id="menikah"
-                                                        name="married_status" value="Menikah" {{
-                                                        old('married_status')==="Menikah" ? "checked" : "" }}>
+                                                        name="married_status" value="Menikah" {{ old('married_status',
+                                                        $patient->married_status) === "Menikah" ? "checked" : "" }}>
                                                     <label class="custom-control-label" for="menikah">Menikah</label>
                                                 </div>
                                                 <div class="custom-control custom-radio d-inline mr-4">
                                                     <input type="radio" class="custom-control-input" id="janda"
-                                                        name="married_status" value="Janda" {{
-                                                        old('married_status')==="Janda" ? "checked" : "" }}>
+                                                        name="married_status" value="Janda" {{ old('married_status',
+                                                        $patient->married_status) === "Janda" ? "checked" : "" }}>
                                                     <label class="custom-control-label" for="janda">Janda</label>
                                                 </div>
                                                 <div class="custom-control custom-radio d-inline mr-4">
                                                     <input type="radio" class="custom-control-input" id="duda"
-                                                        name="married_status" value="Duda" {{
-                                                        old('married_status')==="Duda" ? "checked" : "" }}>
+                                                        name="married_status" value="Duda" {{ old('married_status',
+                                                        $patient->married_status) === "Duda" ? "checked" : "" }}>
                                                     <label class="custom-control-label" for="duda">Duda</label>
                                                 </div>
                                                 @error('married_status')
@@ -303,7 +324,8 @@
                                                 <input type="text"
                                                     class="@error('language') is-invalid @enderror form-control"
                                                     id="language" placeholder="Pasien Menggunakan Bahasa"
-                                                    value="{{ old('language', 'Indonesia') }}" name="language">
+                                                    value="{{ old('language', $patient->language, 'Indonesia') }}"
+                                                    name="language">
                                                 @error('language')
                                                 <p class="invalid-feedback">{{ $message }}</p>
                                                 @enderror
@@ -319,7 +341,8 @@
                                                 <input type="text"
                                                     class="@error('citizenship') is-invalid @enderror form-control"
                                                     id="citizenship" placeholder="Kewarganegaraan Pasien"
-                                                    value="{{ old('citizenship', 'Indonesia') }}" name="citizenship">
+                                                    value="{{ old('citizenship', $patient->citizenship, 'Indonesia') }}"
+                                                    name="citizenship">
                                                 @error('citizenship')
                                                 <p class="invalid-feedback">{{ $message }}</p>
                                                 @enderror
@@ -337,7 +360,7 @@
                                                 <input type="text"
                                                     class="@error('id_card') is-invalid @enderror form-control"
                                                     id="id_card" placeholder="No. KTP/SIM/Paspor Pasien" name="id_card"
-                                                    value="{{ old('id_card') }}">
+                                                    value="{{ old('id_card', $patient->id_card) }}">
                                                 @error('id_card')
                                                 <p class="invalid-feedback">{{ $message }}</p>
                                                 @enderror
@@ -353,7 +376,7 @@
                                                 <input type="text"
                                                     class="@error('address') is-invalid @enderror form-control"
                                                     id="address" placeholder="Alamat Pasien" name="address"
-                                                    value="{{ old('address') }}">
+                                                    value="{{ old('address', $patient->address) }}">
                                                 @error('address')
                                                 <p class="invalid-feedback">{{ $message }}</p>
                                                 @enderror
@@ -371,7 +394,9 @@
                                                     id="province" name="province">
                                                     <option value="" disabled selected></option>
                                                     @foreach($provinces as $province)
-                                                    <option value="{{ $province['id'] }}">{{ $province['nama'] }}
+                                                    <option value="{{ $province['id'] }}" class="asdasdasdasdasdsadsa"
+                                                        {{ $patient->province == $province['id'] ? "selected" : "" }}>
+                                                        {{ $province['nama'] }}
                                                     </option>
                                                     @endforeach
                                                 </select>
@@ -391,7 +416,8 @@
                                                 <select
                                                     class="@error('regency') is-invalid @enderror form-control w-100"
                                                     id="regency" name="regency">
-                                                    <option value="" disabled selected></option>
+                                                    <option value="{{ $patient->regency }}">{{ $patient->regency }}
+                                                    </option>
                                                 </select>
                                                 @error('regency')
                                                 <p class="invalid-feedback">{{ $message }}</p>
@@ -442,7 +468,8 @@
                                                 <input type="text"
                                                     class="@error('mobile_phone_number') is-invalid @enderror form-control"
                                                     id="mobile_phone_number" placeholder="No. HP / Telp Pasien"
-                                                    name="mobile_phone_number" value="{{ old('mobile_phone_number') }}">
+                                                    name="mobile_phone_number"
+                                                    value="{{ old('mobile_phone_number', $patient->mobile_phone_number) }}">
                                                 @error('mobile_phone_number')
                                                 <p class="invalid-feedback">{{ $message }}</p>
                                                 @enderror
@@ -458,7 +485,7 @@
                                             <div class="col-sm-8">
                                                 <input type="email" class="form-control" id="email"
                                                     placeholder="Alamat Email Pasien" name="email"
-                                                    value="{{ old('email') }}">
+                                                    value="{{ old('email', $patient->email) }}">
                                                 @error('email')
                                                 <p class="invalid-feedback">{{ $message }}</p>
                                                 @enderror
@@ -478,26 +505,34 @@
                                                     class="@error('last_education') is-invalid @enderror form-control w-100"
                                                     id="last_education" name="last_education">
                                                     <option value="" disabled selected></option>
-                                                    <option value="Tidak Sekolah" {{
-                                                        old('last_education')==="Tidak Sekolah" ? "selected" : "" }}>
+                                                    <option value="Tidak Sekolah" {{ old('last_education', $patient->
+                                                        last_education)==="Tidak Sekolah" ? "selected" : "" }}>
                                                         Tidak Sekolah</option>
-                                                    <option value="Belum / Tidak tamat SD" {{
-                                                        old('last_education')==="Belum / Tidak tamat SD" ? "selected"
+                                                    <option value="Belum / Tidak tamat SD" {{ old('last_education',
+                                                        $patient->last_education)==="Belum / Tidak tamat SD" ?
+                                                        "selected"
                                                         : "" }}>Belum / Tidak tamat SD
                                                     </option>
-                                                    <option value="Tamat SD" {{ old('last_education')==="Tamat SD"
+                                                    <option value="Tamat SD" {{ old('last_education', $patient->
+                                                        last_education)==="Tamat SD"
                                                         ? "selected" : "" }}>Tamat SD</option>
-                                                    <option value="Tamat SMTP" {{ old('last_education')==="Tamat SMTP"
+                                                    <option value="Tamat SMTP" {{ old('last_education', $patient->
+                                                        last_education)==="Tamat SMTP"
                                                         ? "selected" : "" }}>Tamat SMTP</option>
-                                                    <option value="Tamat SLTA" {{ old('last_education')==="Tamat SLTA"
+                                                    <option value="Tamat SLTA" {{ old('last_education', $patient->
+                                                        last_education)==="Tamat SLTA"
                                                         ? "selected" : "" }}>Tamat SLTA</option>
-                                                    <option value="Tamat D3" {{ old('last_education')==="Tamat D3"
+                                                    <option value="Tamat D3" {{ old('last_education', $patient->
+                                                        last_education)==="Tamat D3"
                                                         ? "selected" : "" }}>Tamat D3</option>
-                                                    <option value="Tamat S1" {{ old('last_education')==="Tamat S1"
+                                                    <option value="Tamat S1" {{ old('last_education', $patient->
+                                                        last_education)==="Tamat S1"
                                                         ? "selected" : "" }}>Tamat S1</option>
-                                                    <option value="Tamat S2" {{ old('last_education')==="Tamat S2"
+                                                    <option value="Tamat S2" {{ old('last_education', $patient->
+                                                        last_education)==="Tamat S2"
                                                         ? "selected" : "" }}>Tamat S2</option>
-                                                    <option value="Tamat PT" {{ old('last_education')==="Tamat PT"
+                                                    <option value="Tamat PT" {{ old('last_education', $patient->
+                                                        last_education)==="Tamat PT"
                                                         ? "selected" : "" }}>Tamat PT</option>
                                                 </select>
                                                 @error('last_education')
@@ -585,7 +620,8 @@
                                             <div class="col-sm-8">
                                                 <input type="text" class="form-control" id="accessible_family"
                                                     placeholder="Nama Keluarga yang bisa dihubungi"
-                                                    name="accessible_family" value="{{ old('accessible_family') }}">
+                                                    name="accessible_family"
+                                                    value="{{ old('accessible_family', $patient->accessible_family) }}">
                                             </div>
                                         </div>
                                     </div>
@@ -597,7 +633,7 @@
                                             <div class="col-sm-8">
                                                 <input type="text" class="form-control" id="family_age"
                                                     placeholder="Usia Suami" name="family_age"
-                                                    value="{{ old('family_age') }}">
+                                                    value="{{ old('family_age', $patient->family_age) }}">
                                             </div>
                                         </div>
                                     </div>
@@ -609,7 +645,7 @@
                                             <div class="col-sm-8">
                                                 <input type="text" class="form-control" id="family_job"
                                                     placeholder="Pekerjaan Suami" name="family_job"
-                                                    value="{{ old('family_job') }}">
+                                                    value="{{ old('family_job', $patient->family_job) }}">
                                             </div>
                                         </div>
                                     </div>
@@ -621,7 +657,7 @@
                                             <div class="col-sm-8">
                                                 <input type="text" class="form-control" id="father_name"
                                                     placeholder="Nama Ayah Pasien" name="father_name"
-                                                    value="{{ old('father_name') }}">
+                                                    value="{{ old('father_name', $patient->father_name) }}">
                                             </div>
                                         </div>
                                     </div>
@@ -670,7 +706,7 @@
                                             <div class="col-sm-8">
                                                 <input type="text" class="form-control" id="family_mobile_phone_number"
                                                     placeholder="No. HP / Telp Suami" name="family_mobile_phone_number"
-                                                    value="{{ old('family_mobile_phone_number') }}">
+                                                    value="{{ old('family_mobile_phone_number', $patient->family_mobile_phone_number) }}">
                                             </div>
                                         </div>
                                     </div>
@@ -682,7 +718,7 @@
                                             <div class="col-sm-8">
                                                 <input type="text" class="form-control" id="family_address"
                                                     placeholder="Alamat Suami" name="family_address"
-                                                    value="{{ old('family_address') }}">
+                                                    value="{{ old('family_address', $patient->family_address) }}">
                                             </div>
                                         </div>
                                     </div>
@@ -694,7 +730,7 @@
                                             <div class="col-sm-8">
                                                 <input type="text" class="form-control" id="mother_name"
                                                     placeholder="Nama Ibu Pasien" name="mother_name"
-                                                    value="{{ old('mother_name') }}">
+                                                    value="{{ old('mother_name', $patient->mother_name) }}">
                                             </div>
                                         </div>
                                     </div>

@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call(EthnicTableSeeder::class);
 
-        Patient::factory()->count(100)->create();
+        Patient::factory()->count(1000)->create();
         User::factory(10)->create();
         User::create([
             'name' => "Dimas Candra Pebriyanto",

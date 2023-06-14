@@ -58,15 +58,14 @@
                         </a>
                         <ul>
                             <li class="{{ set_active('daftar_rekam_medis')}}">
-                                <a href="/daftar_rekam_medis" title="Daftar Rekam Medis"
+                                <a href="{{ route('pendaftaran.pasien.daftar_rm') }}" title="Daftar Rekam Medis"
                                     data-filter-tags="pendaftaran daftar rekam medis">
                                     <span class="nav-link-text" data-i18n="nav.pendaftaran_daftar_rekam_medis">Daftar
                                         Rekam Medis</span>
                                 </a>
                             </li>
                             <li class="{{ set_active('pendaftaran_pasien_baru')}}" style="display: none">
-                                <a href="/pendaftaran_pasien_baru" title="Daftar Rekam Medis"
-                                    data-filter-tags="pendaftaran daftar rekam medis">
+                                <a href="" title="Daftar Rekam Medis" data-filter-tags="pendaftaran daftar rekam medis">
                                     <span class="nav-link-text" data-i18n="nav.pendaftaran_pasien_baru">Daftar
                                         Rekam Medis</span>
                                 </a>

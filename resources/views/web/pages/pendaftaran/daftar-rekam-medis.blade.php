@@ -25,6 +25,7 @@
                         </a>
                         <!-- datatable start -->
                         <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
+                            <i id="loading-spinner" class="fas fa-spinner fa-spin"></i>
                             <thead class="bg-primary-600">
                                 <tr>
                                     <th>#</th>
@@ -38,6 +39,8 @@
                                 </tr>
                             </thead>
                             <tbody>
+
+
                                 @foreach ($patients as $patient)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
@@ -86,10 +89,14 @@
 <script>
     $(document).ready(function()
             {
-
+                $('#loading-spinner').show();
                 // initialize datatable
                 $('#dt-basic-example').dataTable(
                 {
+                    "drawCallback": function(settings) {
+                    // Menyembunyikan preloader setelah data berhasil dimuat
+                    $('#loading-spinner').hide();
+                    },
                     responsive: true,
                     lengthChange: false,
                     dom:
